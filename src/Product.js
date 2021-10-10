@@ -4,21 +4,7 @@ import './Product.css';
 const Product = ({ name, price, onShowProduct, onCalculateTotal }) => {
     // Declare a new state variable called quantity
     const [quantity, setQuantity] = useState(0);
-
-    //   const greenButton = {
-    //     backgroundColor: 'green',
-    //     color: 'white',
-    //     padding: '5px 15px',
-    //   };
-
-    //   const maroonButton = {
-    //     backgroundColor: 'maroon',
-    //     color: 'white',
-    //     padding: '5px 15px',
-    //   };
-
     const buy = () => {
-        // alert('You selected this product');
         setQuantity(quantity + 1);
         onCalculateTotal(price);
     };
@@ -27,16 +13,16 @@ const Product = ({ name, price, onShowProduct, onCalculateTotal }) => {
         <div>
             <h3>{name}</h3>
             <p>${price}</p>
-            <div class="d-grid gap-2 col-md-3">
-                <button class="btn btn-primary" onClick={buy}>
+            <div className="d-grid gap-2 col-md-3">
+                <button className="btn btn-primary" onClick={buy}>
                     Buy
                 </button>
-                <button class="btn btn-secondary" onClick={() => onShowProduct(name)}>
+                <button className="btn btn-secondary" onClick={() => onShowProduct(name)}>
                     Show
                 </button>
             </div>
-            <h3 class="mt-3">Quantity: {quantity}</h3>
-            <hr />
+            <h3 className="mt-3">Quantity: {quantity}</h3>
+            <hr className="d-grid gap-2 col-md-3"/>
         </div>
     );
 };
@@ -50,10 +36,8 @@ const ProductForm = ({ index, onCreateProduct }) => {
     const [price, setPrice] = useState(0);
 
     const createProduct = (event) => {
-        // alert('Name: ' + name + '- Price: ' + price);
         event.preventDefault();
         const product = { id: index, name, price };
-        console.log(product);
         onCreateProduct(product);
 
         setName('');
@@ -61,29 +45,31 @@ const ProductForm = ({ index, onCreateProduct }) => {
     };
 
     return (
-        <form>
+        <form onSubmit={createProduct}>
+            <div className="col col-md-3">
             <label>Product Name: </label>
-            <div class="col col-md-3">
                 <input
-                    class="form-control"
+                    className="form-control"
                     type="text"
+                    required="true"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <br />
                 <label>Product Price: </label>
                 <input
-                    class="form-control"
+                    className="form-control"
                     type="number"
+                    required="true"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                 />
                 <br />
             </div>
-            <div class="d-grid gap-2 col-md-3">
-            <button class="btn btn-success" onClick={createProduct}>Create</button>
+            <div className="d-grid gap-2 col-md-3">
+            <button className="btn btn-success">Create</button>
             </div>
-            <hr />
+            <hr className="d-grid gap-2 col-md-3"/>
         </form>
     );
 };
